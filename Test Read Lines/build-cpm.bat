@@ -7,13 +7,16 @@ SET PATH=%Z88DK_DIR%bin;%PATH%
 echo.
 echo ****************************************************************************
 
-zcc +cpm main.c -compiler=sdcc -create-app -O3 --opt-code-speed -o vtest52
+zcc +cpm -vn --list -m -create-app -compiler=sdcc -O3 --opt-code-speed main.c -o "test"
 
 echo ****************************************************************************
 
+dd if=/dev/zero of="C:\My Documents\NABU Internet Adapter\Store\c.dsk" bs=512 count=16384 
+
+
 mkfs.cpm -f naburn8mb "C:\My Documents\NABU Internet Adapter\Store\c.dsk"
 
-cpmcp -f naburn8mb    "C:\My Documents\NABU Internet Adapter\Store\c.dsk" vtest52.com 0:
+cpmcp -f naburn8mb    "C:\My Documents\NABU Internet Adapter\Store\c.dsk" test.com 0:
 
 dir *.com
 
