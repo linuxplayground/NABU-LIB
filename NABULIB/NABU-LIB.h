@@ -1564,6 +1564,10 @@ inline uint8_t ayRead(uint8_t reg);
   // **************************************************************************
   void vdp_writeUInt32ToBinary(uint32_t v);
 
+  // **************************************************************************
+  // Set every pattern to the same colour.
+  // **************************************************************************
+  void vdp_setPatternColor(uint8_t color);
 #endif
 
 
