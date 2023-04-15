@@ -1729,4 +1729,13 @@ void playNoteDelay(uint8_t channel, uint8_t note, uint16_t delayLength) {
 
     vdp_print(str);
   }
+
+  //Set all values in the color table to color.
+  void vdp_setPatternColor(uint8_t color) {
+      vdp_setWriteAddress(_vdpColorTableAddr);
+      for (uint16_t i = 0; i < 0x1800; i++) {
+          IO_VDPDATA = color;
+      }
+  }
+
 #endif
