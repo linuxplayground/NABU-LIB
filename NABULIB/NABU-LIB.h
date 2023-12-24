@@ -33,7 +33,6 @@
 #define BIN_CPM 200
 #define byte uint8_t
 
-
 // **************************************************************************
 // 
 // BINARY TYPE
@@ -189,7 +188,7 @@
 //
 // If you run into problems where the code is taking longer than a screen refresh vdp
 // interrupt, you can skip the "missed" interrupt and wait for the next. This can be
-// done by adding a vdpIsReady = false; before you call vdp_waitVDPReadyInt();
+// done by adding a vdpIsReady = false; before you call vdp_waitVDPReadyInt(void);
 //
 // *Note: You do not need this enabled when your program is released because it does
 //        take a few instructions to run.
@@ -391,7 +390,7 @@ volatile uint8_t _randomSeed = 0;
   // For the customizable vdp scanline interrupt
   // See the void vdp_addISR(void (*vdpISR)()) function for this
   // **************************************************************************
-  void (*_vdp_ISR)();
+  void (*_vdp_ISR)(void);
 
   
   // **************************************************************************
@@ -715,22 +714,22 @@ const uint8_t _NOTES_FINE[] = {
 // Based on your configuration, this will initialize what you have not "#define DISABLE_X"
 // This will enable the audio, HCCA RX & keyboard Interupts, seed random generator, and disable the ROM
 // **************************************************************************
-void initNABULib();
+void initNABULib(void);
 
 // **************************************************************************
 // Disable interrupts on the nabu
 // **************************************************************************
-inline void NABU_DisableInterrupts();
+inline void NABU_DisableInterrupts(void);
 
 // **************************************************************************
 // Enable interrupts on the nabu
 // **************************************************************************
-inline void NABU_EnableInterrupts();
+inline void NABU_EnableInterrupts(void);
 
 // **************************************************************************
 // Perform one NOP
 // **************************************************************************
-inline void nop();
+inline void nop(void);
 
 // **************************************************************************
 // Shift an array (arr) of len to the right by N
@@ -761,7 +760,7 @@ void RightShift(uint8_t *arr, uint16_t len, uint8_t n);
 // the settings have been changed and you wish to restore them to use
 // playNoteDelay()
 // **************************************************************************
-void initNABULIBAudio();
+void initNABULIBAudio(void);
 
 // **************************************************************************
 // Play a note with delay envelope
@@ -798,12 +797,12 @@ inline uint8_t ayRead(uint8_t reg);
   // **************************************************************************
   // Returns false if no key has been pressed, otherwise it returns the key value
   // **************************************************************************
-  uint8_t isKeyPressed();
+  uint8_t isKeyPressed(void);
 
   // **************************************************************************
   // Blocks and waits for a key, returns that key value
   // **************************************************************************
-  uint8_t getChar();
+  uint8_t getChar(void);
 
   // **************************************************************************
   // Read a line of text inputed by the keyboard. This does not null terminate the
@@ -881,28 +880,28 @@ inline uint8_t ayRead(uint8_t reg);
   __at (0xff2e) volatile uint8_t  _CPM_COLUMN_WIDTH;   
 
   // Clear from current row to the end of screen
-  void vt_clearToEndOfScreen();
+  void vt_clearToEndOfScreen(void);
 
   // Clear from cursor to end of line
-  void vt_clearToEndOfLine();
+  void vt_clearToEndOfLine(void);
 
   // Clear the whole screen
-  void vt_clearScreen();
+  void vt_clearScreen(void);
 
   // Clear the current row 
-  void vt_clearLine();
+  void vt_clearLine(void);
 
   // Clear from start of line to the current cursor position
-  void vt_clearToStartOfLine();
+  void vt_clearToStartOfLine(void);
   
   // Clear from start of screen to the current row
-  void vt_clearToStartOfScreen();
+  void vt_clearToStartOfScreen(void);
 
   // Move the cursor down number of lines
   void vt_moveCursorDown(uint8_t count);
 
   // Move cursor to top left
-  void vt_cursorHome();
+  void vt_cursorHome(void);
 
   // Move cursor left number of characters
   void vt_moveCursorLeft(uint8_t count);
@@ -914,7 +913,7 @@ inline uint8_t ayRead(uint8_t reg);
   void vt_moveCursorUp(uint8_t count);
 
   // Delete the whole line
-  void vt_deleteLine();
+  void vt_deleteLine(void);
 
   // Move the cursor to the specified X Y coorindate
   void vt_setCursor(uint8_t x, uint8_t y);
@@ -923,34 +922,34 @@ inline uint8_t ayRead(uint8_t reg);
   void vt_foregroundColor(uint8_t color);
 
   // Insert a row at the current row
-  void vt_insertLine();
+  void vt_insertLine(void);
 
   // Restore the cursor position from the saved position (calling vt_saveCursorPosition)
-  void vt_restoreCursorPosition();
+  void vt_restoreCursorPosition(void);
 
   // Set the background color (not supported)
   void vt_backgroundColor(uint8_t color);
 
   // Save the cursor position (can be restored by calling vt_restoreCursorPosition)
-  void vt_saveCursorPosition();
+  void vt_saveCursorPosition(void);
 
   // Move cursor up and insert a row
-  void vt_cursorUpAndInsert();
+  void vt_cursorUpAndInsert(void);
 
   // Disable wrap when reach end of the line
-  void vt_wrapOff();
+  void vt_wrapOff(void);
 
   // Enables wrap when reaching end of line
-  void vt_wrapOn();
+  void vt_wrapOn(void);
 
   // Regular font (not inverted)
-  void vt_normalVideo();
+  void vt_normalVideo(void);
 
   // Inverted font (not regular)
-  void vt_reverseVideo();
+  void vt_reverseVideo(void);
 
   // Is this running Cloud CPM?
-  bool isCloudCPM();
+  bool isCloudCPM(void);
 #endif 
 
 
@@ -973,48 +972,48 @@ inline uint8_t ayRead(uint8_t reg);
   // **************************************************************************
   // Returns TRUE if there is data to be read from the hcca rx buffer (256 bytes)
   // **************************************************************************
-  inline bool hcca_isRxBufferAvailable();
+  inline bool hcca_isRxBufferAvailable(void);
 
   // **************************************************************************
   // Returns how much data is currently in the RX buffer
   // **************************************************************************
-  uint8_t hcca_getSizeOfDataInBuffer();
+  uint8_t hcca_getSizeOfDataInBuffer(void);
 
   // **************************************************************************
   // Returns true if receive a response from Internet Adapter otherwise
   // will timeout and return false
   // **************************************************************************
-  bool hcca_ping();
+  bool hcca_ping(void);
 
   // **************************************************************************
   // Read a byte from the buffer.
   // Check the hcca_ISRxBufferAvailable() first or this blocks.
   // **************************************************************************
-  uint8_t hcca_readByte();
+  uint8_t hcca_readByte(void);
 
   // **************************************************************************
   // Read an unsigned 16-bit integer from the HCCA
   // *Note: You must first check if a byte is available with hcca_IsDataAvailble() first or you get garbage.
   // **************************************************************************
-  uint16_t hcca_readUInt16();
+  uint16_t hcca_readUInt16(void);
 
   // **************************************************************************
   // Read an signed 16-bit integer from the HCCA
   // *Note: You must first check if a byte is available with hcca_IsDataAvailble() first or you get garbage.
   // **************************************************************************
-  int16_t hcca_readInt16();
+  int16_t hcca_readInt16(void);
 
   // **************************************************************************
   // Read an unsigned 32-bit integer from the HCCA
   // *Note: You must first check if a byte is available with hcca_IsDataAvailble() first or you get garbage.
   // **************************************************************************
-  uint32_t hcca_readUInt32();
+  uint32_t hcca_readUInt32(void);
 
   // **************************************************************************
   // Read an signed 32-bit integer from the HCCA
   // *Note: You must first check if a byte is available with hcca_IsDataAvailble() first or you get garbage.
   // **************************************************************************
-  int32_t hcca_readInt32();
+  int32_t hcca_readInt32(void);
 
   // **************************************************************************
   // Read bufferLen into buffer, starting at the offset
@@ -1108,7 +1107,7 @@ inline uint8_t ayRead(uint8_t reg);
   //
   // If you run into problems where the code is taking longer than a screen refresh vdp
   // interrupt, you can skip the "missed" interrupt and wait for the next. This can be
-  // done by adding a vdpIsReady = false; before you call vdp_waitVDPReadyInt();
+  // done by adding a vdpIsReady = false; before you call vdp_waitVDPReadyInt(void);
   //
   // The following variables will be set from an interrupt.
   //
@@ -1121,13 +1120,13 @@ inline uint8_t ayRead(uint8_t reg);
   // void main() {
   //
   //   // init the nabu lib library
-  //   initNABULib();
+  //   initNABULib(void);
   //
   //   // switch to the graphic mode 
   //   vdp_initG2Mode(0, true, false, false, false);
   //
   //   // enable the VDP sync
-  //   vdp_enableVDPReadyInt();
+  //   vdp_enableVDPReadyInt(void);
   //
   //   while (!isKeyPressed()) {
   //
@@ -1136,23 +1135,23 @@ inline uint8_t ayRead(uint8_t reg);
   //     //      check for collisions and stuff
   //
   //     if (vdpStatusRegVal & VDP_FLAG_COLLISION) 
-  //       doCollisionThings();
+  //       doCollisionThings(void);
   //
   //     // wait for the vsync
-  //     vdp_waitVDPReadyInt();
+  //     vdp_waitVDPReadyInt(void);
   //
   //     // update the sprites and other screen stuff
   //   }
   //
   //   // remove the vdp sync
-  //   vdp_disableVDPReadyInt();
+  //   vdp_disableVDPReadyInt(void);
   // }
   //
   //
   // **************************************************************************
-  void vdp_enableVDPReadyInt();
-  inline void vdp_waitVDPReadyInt();
-  void vdp_disableVDPReadyInt();
+  void vdp_enableVDPReadyInt(void);
+  inline void vdp_waitVDPReadyInt(void);
+  void vdp_disableVDPReadyInt(void);
 
   // **************************************************************************
   // Add a function to the VDP frame sync interrupt.
@@ -1200,18 +1199,18 @@ inline uint8_t ayRead(uint8_t reg);
   //
   // void main() { 
   //
-  //   initNABULib();
+  //   initNABULib(void);
   //   vdp_addISR(myVdpISR);
   // }
   //
   // **************************************************************************
-  void vdp_addISR(void (*isr)());
+  void vdp_addISR(void (*isr)(void));
 
   // **************************************************************************
-  // Removes and stops the VDP interrupt after calling vdp_addISR();
+  // Removes and stops the VDP interrupt after calling vdp_addISR(void);
   // When you are switching to a menu in text mode or need to stop the game, call this.
   // **************************************************************************
-  void vdp_removeISR();
+  void vdp_removeISR(void);
 
   // **************************************************************************
   // Initializes the VDP in text mode
@@ -1253,7 +1252,7 @@ inline uint8_t ayRead(uint8_t reg);
   // Initializes the VDP in 64x48 Multicolor Mode. Not really useful if more than 4k Video ram is available
   //
   // **************************************************************************
-  void vdp_initMultiColorMode();
+  void vdp_initMultiColorMode(void);
 
   // **************************************************************************
   // Initializes the VDP in MSX Basic compatible mode for loading .SC2 files
@@ -1280,12 +1279,12 @@ inline uint8_t ayRead(uint8_t reg);
   // **************************************************************************
   // Clear all VRAM set to 0's
   // **************************************************************************
-  void vdp_clearVRAM();
+  void vdp_clearVRAM(void);
 
   // **************************************************************************
   // Clears the screen
   // **************************************************************************
-  void vdp_clearScreen();
+  void vdp_clearScreen(void);
 
   // **************************************************************************
   // Fills the screen with the character
@@ -1554,7 +1553,7 @@ inline uint8_t ayRead(uint8_t reg);
   // **************************************************************************
   // Add a new line (move down and to line start)
   // **************************************************************************
-  void vdp_newLine();
+  void vdp_newLine(void);
 
   // **************************************************************************
   // Get the character in text mode at the specified location directly from VRAM, which is slow.

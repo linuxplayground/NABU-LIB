@@ -37,7 +37,7 @@ void cpm_buildDrive(uint8_t driveLetter, uint8_t *responseMsg) {
 
   hcca_writeByte(driveLetter);
 
-  uint8_t readCnt = hcca_readByte();
+  uint8_t readCnt = hcca_readByte(void);
   hcca_readBytes(0, readCnt, responseMsg);
 }
 
@@ -55,7 +55,7 @@ void cpm_extractDrive(uint8_t driveLetter, uint8_t *responseMsg) {
   // 0xdf
   hcca_writeByte(0xdf);
 
-  uint8_t readCnt = hcca_readByte();
+  uint8_t readCnt = hcca_readByte(void);
   hcca_readBytes(0, readCnt, responseMsg);
 }
 
