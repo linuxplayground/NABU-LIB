@@ -28,7 +28,7 @@ void ia_focusInterrupts() {
   // temporarily disable all other interrupts while we perform an expensive hcca read
   // we let hcca_writeByte set the interrupt for us
 
-  NABU_DisableInterrupts();
+  NABU_DisableInterrupts(void);
 
   _ia_TmpOriginalInterrupt = ayRead(IOPORTA);
 
@@ -39,7 +39,7 @@ void ia_restoreInterrupts() {
 
   ayWrite(IOPORTA, _ia_TmpOriginalInterrupt);
 
-  NABU_EnableInterrupts();
+  NABU_EnableInterrupts(void);
 }
 
 // -----------------------------------------------------------
@@ -48,13 +48,13 @@ void ia_restoreInterrupts() {
 uint8_t ia_getParentCount() {
 
   // 0xba
-  ia_focusInterrupts();
+  ia_focusInterrupts(void);
 
   hcca_writeByte(0xba);
 
-  uint8_t t = hcca_readByte();
+  uint8_t t = hcca_readByte(void);
 
-  ia_restoreInterrupts();
+  ia_restoreInterrupts(void);
 
   return t;
 }
@@ -67,7 +67,7 @@ uint8_t ia_getParentCount() {
 void ia_getParentName(uint8_t parentId, uint8_t *titleBuf) {
 
   // 0xbb
-  ia_focusInterrupts();
+  ia_focusInterrupts(void);
 
   for (uint8_t i = 0; i < 64; i++)
     titleBuf[i] = 0x00;
@@ -76,11 +76,11 @@ void ia_getParentName(uint8_t parentId, uint8_t *titleBuf) {
 
   hcca_writeByte(parentId);
 
-  uint8_t readCnt = hcca_readByte();
+  uint8_t readCnt = hcca_readByte(void);
 
   hcca_readBytes(0, readCnt, titleBuf);
 
-  ia_restoreInterrupts();
+  ia_restoreInterrupts(void);
 }
 
 // -----------------------------------------------------------
@@ -89,15 +89,15 @@ void ia_getParentName(uint8_t parentId, uint8_t *titleBuf) {
 uint8_t ia_getChildCount(uint8_t parentId) {
 
   // 0xbc
-  ia_focusInterrupts();
+  ia_focusInterrupts(void);
 
   hcca_writeByte(0xbc);
 
   hcca_writeByte(parentId);
 
-  uint8_t t = hcca_readByte();
+  uint8_t t = hcca_readByte(void);
 
-  ia_restoreInterrupts();
+  ia_restoreInterrupts(void);
 
   return t;
 }
@@ -110,7 +110,7 @@ uint8_t ia_getChildCount(uint8_t parentId) {
 void ia_getChildName(uint8_t parentId, uint8_t childId, uint8_t *titleBuf) {
 
   // 0xbd
-  ia_focusInterrupts();
+  ia_focusInterrupts(void);
 
   for (uint8_t i = 0; i < 64; i++)
     titleBuf[i] = 0x00;
@@ -121,11 +121,11 @@ void ia_getChildName(uint8_t parentId, uint8_t childId, uint8_t *titleBuf) {
 
   hcca_writeByte(childId);
 
-  uint8_t readCnt = hcca_readByte();
+  uint8_t readCnt = hcca_readByte(void);
 
   hcca_readBytes(0, readCnt, titleBuf);
 
-  ia_restoreInterrupts();
+  ia_restoreInterrupts(void);
 }
 
 // -----------------------------------------------------------
