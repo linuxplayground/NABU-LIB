@@ -457,9 +457,7 @@ void playNoteDelay(uint8_t channel, uint8_t note, uint16_t delayLength) {
   switch (channel) {
     case 0:
 
-      ayWrite(8, 0b00010000);
-      ayWrite(9, 0b00000000);
-      ayWrite(10, 0b00000000);
+      ayWrite( 8, 0b00010000);
 
       ayWrite(0x00, _NOTES_FINE[note]);
       ayWrite(0x01, _NOTES_COURSE[note]);
@@ -468,9 +466,7 @@ void playNoteDelay(uint8_t channel, uint8_t note, uint16_t delayLength) {
       break;
     case 1:
 
-      ayWrite(8, 0b00000000);
-      ayWrite(9, 0b00010000);
-      ayWrite(10, 0b00000000);
+      ayWrite( 9, 0b00010000);
 
       ayWrite(0x02, _NOTES_FINE[note]);
       ayWrite(0x03, _NOTES_COURSE[note]);
@@ -479,8 +475,6 @@ void playNoteDelay(uint8_t channel, uint8_t note, uint16_t delayLength) {
       break;
     case 2:
 
-      ayWrite(8, 0b00000000);
-      ayWrite(9, 0b00000000);
       ayWrite(10, 0b00010000);
 
       ayWrite(0x04, _NOTES_FINE[note]);

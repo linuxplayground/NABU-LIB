@@ -306,11 +306,11 @@ volatile uint8_t _randomSeed = 0;
   volatile uint8_t _rxBufferReadPos  = 0;
   volatile uint8_t _rxBufferWritePos = 0;
   
-  #warning HCCA Interupt: Enabled
+  ////#warning HCCA Interupt: Enabled
   
 #else
   
-  #warning HCCA Interrupt: Disabled
+  ////#warning HCCA Interrupt: Disabled
   
 #endif
 
@@ -331,11 +331,11 @@ volatile uint8_t _randomSeed = 0;
   };
 
   
-  #warning Keyboard Interupt Enabled. Use NABU-LIB keyboard functions only (no CPM STDIN)
+  //#warning Keyboard Interupt Enabled. Use NABU-LIB keyboard functions only (no CPM STDIN)
   
 #else
   
-  #warning Keyboard Interupt Disabled. If building for CPM, uses C STDIN stdio/conio functions for keyboard.
+  //#warning Keyboard Interupt Disabled. If building for CPM, uses C STDIN stdio/conio functions for keyboard.
   
 #endif
  
@@ -507,13 +507,13 @@ volatile uint8_t _randomSeed = 0;
 
 
   
-  #warning VDP has been enabled. If using CPM, you can mix STDOUT and NABU-LIB vdp functions.
+  //#warning VDP has been enabled. If using CPM, you can mix STDOUT and NABU-LIB vdp functions.
   
 
 #else
 
   
-  #warning VDP has been disabled. If using CPM, you must use STDOUT functions (i.e. printf, fputs, etc). NABU-LIB vdp functions are not available
+  //#warning VDP has been disabled. If using CPM, you must use STDOUT functions (i.e. printf, fputs, etc). NABU-LIB vdp functions are not available
   
 
 #endif
