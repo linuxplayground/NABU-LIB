@@ -1,3 +1,4 @@
+# NEVER SYNC THIS FORK.  It can't be synced - because my changes are probably no good for upstream
 # NABU-LIB
 
 MAKE SOME SOMETHING :D
