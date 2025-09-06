@@ -502,6 +502,9 @@ void playNoteDelay(uint8_t channel, uint8_t note, uint16_t delayLength) {
 
 #ifndef DISABLE_KEYBOARD_INT
 
+<<<<<<< HEAD
+  uint8_t isKeyPressed(void) {
+=======
   // We want to emualate the functionality of cpm call #6 which returns 0 if
   // no char waiting
   uint8_t getKey() {
@@ -513,6 +516,7 @@ void playNoteDelay(uint8_t channel, uint8_t note, uint16_t delayLength) {
   }
 
   uint8_t isKeyPressed() {
+>>>>>>> compatiblilty
 
     return (_kbdBufferWritePos != _kbdBufferReadPos);
   }
@@ -1170,8 +1174,13 @@ void playNoteDelay(uint8_t channel, uint8_t note, uint16_t delayLength) {
     vdp_init(VDP_MODE_MULTICOLOR, 0, 0, false, false, false, false);
   }
 
+<<<<<<< HEAD
+  void vdp_clearScreen(void) {
+      
+=======
   void vdp_clearScreen() {
 
+>>>>>>> compatiblilty
     vdp_setWriteAddress(_vdpPatternNameTableAddr);
 
     uint8_t *start = _vdp_textBuffer;
@@ -1934,4 +1943,9 @@ void playNoteDelay(uint8_t channel, uint8_t note, uint16_t delayLength) {
 
     vdp_print(str);
   }
+<<<<<<< HEAD
+
 #endif
+=======
+#endif
+>>>>>>> compatiblilty
